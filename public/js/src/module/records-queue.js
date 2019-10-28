@@ -167,10 +167,16 @@ function uploadQueue() {
 
     connection.getOnlineStatus()
         .then( appearsOnline => {
+           
             if ( !appearsOnline ) {
                 return;
             }
             return store.record.getAll( settings.enketoId, true );
+        }, error => {
+            
+            uploadOngoing = false ;
+            $uploadButton.prop( 'disabled', false );
+            return;  
         } )
         .then( records => {
             if ( !records || records.length === 0 ) {

@@ -23,7 +23,8 @@ const ABSOLUTE_MAX_SIZE = 100 * 1024 * 1024;
 function getOnlineStatus() {
     let online;
 
-    return new Promise( resolve => {
+   
+    return new Promise( (resolve,reject) => {
         $.ajax( CONNECTION_URL, {
                 type: 'GET',
                 cache: false,
@@ -37,9 +38,10 @@ function getOnlineStatus() {
                 resolve( online );
             } )
             .fail( ( jqXHR, textStatus ) => {
-                console.error( 'Failed to establish connection', textStatus );
+                console.error( 'Failed to establish connection:', textStatus );
+                reject(textStatus);
             } );
-    } );
+    });
 }
 
 /*
