@@ -1,6 +1,9 @@
 section.form-footer
   .form-footer__content
     .form-footer__content__main-controls
+      <p id="qrcode"></p>
+      script.
+        document.getElementById("qrcode").innerHTML += `<image src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=` + encodeURIComponent(window.location.href) +'" />';
       if draftEnabled
         fieldset.draft.question.simple-select.hide
           .option-wrapper: label.select 
